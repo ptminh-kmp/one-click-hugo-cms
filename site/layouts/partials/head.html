@@ -1,34 +1,57 @@
-<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="icon" href={{ .Site.Params.favicon | default "/fav.png" }} type="image/gif">
 
-  <title>{{ .Title }} | {{ $.Site.Title }}</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 
-  {{ $stylesheet := .Site.Data.webpack.main }}
-  {{ with $stylesheet.css }}
-    <link href="{{ relURL . }}" rel="stylesheet">
-  {{ end }}
+<!-- font configuration -->
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/font.css" media="all">
 
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <base href="{{ $.Site.BaseURL }}">
+<!-- Internal templates -->
+{{ template "_internal/google_analytics_async.html" . }}
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
 
-	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700" rel="stylesheet">
+<!-- stylesheets -->
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/bootstrap-5/css/bootstrap.min.css" media="all">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/header.css" media="all">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/footer.css" media="all">
 
-	<!-- Favicons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#ff4400">
-	<meta name="theme-color" content="#fff">
+<!-- theme -->
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/theme.css" media="all">
 
-	<!-- Open Graph -->
-	<meta property="og:type" content="business.business">
-	<meta property="og:title" content="Kaldi | Great coffee with a conscience">
-	<meta property="og:url" content="/">
-	<meta property="og:image" content="/img/og-image.jpg">
+<!-- Custom Styles -->
+{{ if .Site.Params.customCSS }}
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/style.css">
+{{ end }}
 
-  {{ if .IsHome }}
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  {{ end }}
-</head>
+<style>
+    :root {
+        --text-color: {{ .Site.Params.color.textColor | default "#343a40" }};
+        --text-secondary-color: {{ .Site.Params.color.secondaryTextColor | default "#6c757d" }};
+        --background-color: {{ .Site.Params.color.backgroundColor | default "#eaedf0" }};
+        --secondary-background-color: {{ .Site.Params.color.secondaryBackgroundColor | default "#64ffda1a" }};
+        --primary-color: {{ .Site.Params.color.primaryColor | default "#007bff" }};
+        --secondary-color: {{ .Site.Params.color.secondaryColor | default "#f8f9fa" }};
+
+        /* dark mode colors */
+        --text-color-dark: {{ .Site.Params.color.darkmode.textColor | default "#e4e6eb" }};
+        --text-secondary-color-dark: {{ .Site.Params.color.darkmode.secondaryTextColor | default "#b0b3b8" }};
+        --background-color-dark: {{ .Site.Params.color.darkmode.backgroundColor | default "#18191a" }};
+        --secondary-background-color-dark: {{ .Site.Params.color.darkmode.secondaryBackgroundColor | default "#212529" }};
+        --primary-color-dark: {{ .Site.Params.color.darkmode.primaryColor | default "#ffffff" }};
+        --secondary-color-dark: {{ .Site.Params.color.darkmode.secondaryColor | default "#212529" }};
+    }
+    body {
+        font-size: {{ .Site.Params.font.fontSize | default "1rem" }};
+        font-weight: {{ .Site.Params.font.fontWeight | default "400" }};
+        line-height: {{ .Site.Params.font.lineHeight | default "1.5" }};
+        text-align: {{ .Site.Params.font.textAlign | default "left" }};
+    }
+</style>

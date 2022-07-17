@@ -1,17 +1,25 @@
-<!doctype html>
-<html lang="{{ $.Site.Language.Lang }}">
-  {{ partial "head" . }}
-  <body class="sans-serif">
+<!DOCTYPE html>
+<html>
 
-    {{ block "header" . }}{{ partial "nav" . }}{{end}}
+<head>
+  {{- partial "head.html" . -}}
+  {{- block "head" . }} {{- end }}
+  <title>
+    {{- block "title" . }} {{- end }}
+  </title>
+</head>
 
-    {{ block "main" . }}{{ end }}
+<body class="light" onload="loading()">
+  <!-- javascripts -->
+  <!-- <script src="/js/jquery-3.6.0.min.js"></script> -->
+  <script src="{{ .Site.Params.staticPath }}/bootstrap-5/js/bootstrap.bundle.js"></script>
 
-    {{ block "footer" . }}{{ partial "footer" . }}{{end}}
+  {{- partial "sections/header.html" . -}}
+  <div id="content">
+    {{- block "main" . }}{{- end }}
+  </div>
+  {{- partial "sections/footer/index.html" . -}}
+  {{- partial "scripts.html" . -}}
+</body>
 
-    {{ $script := .Site.Data.webpack.main }}
-    {{ with $script.js }}
-      <script src="{{ relURL . }}"></script>
-    {{ end }}
-  </body>
 </html>
